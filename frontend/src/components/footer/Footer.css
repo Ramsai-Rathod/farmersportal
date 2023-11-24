@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Rubik+Puddles&display=swap');
+.Footer {
+    padding: 2rem 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .ft-1 h3 {
+    font-weight: 700;
+    font-family: cursive;
+    letter-spacing: 2px;
+    padding: 0.5rem 0;
+  }
+  
+  .ft-1 span {
+    color: #08f634;
+  }
+  
+  .ft-1 p {
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    padding: 0rem 3rem 0.8rem 0;
+    font-weight: 500;
+    color: #6a6a6a;
+    margin:0;
+  }
+  
+  .footer-icons i{
+    padding: 0.4rem 0.5rem;
+    background: #e1e1e1;
+    color: #08f610;
+    margin: 0 0.5rem;
+    border-radius: 50%;
+  }
+  
+  .footer-icons i:hover {
+    background: #037425;
+    color: #fff;
+    transition: 0.6s;
+    cursor: pointer;
+  }
+  
+  .Footer h5 {
+    color:#08f610;
+    font-weight: 200;
+  }
+  .Footer h3 {
+    color:#08f610;
+    font-weight: 200;
+  }
+  
+  .ft-2 ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .ft-2 p{
+    color:#6a6a6a;
+  }
+  
+  .ft-2 ul li {
+    padding: 0.35rem 0;
+    font-weight: 500;
+  }
+  
+  .ft-2 ul a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.06rem;
+  }
+  
+  
+  .ft-3 p {
+    font-weight: 500;
+    font-size: 1.06rem;
+    color: #6a6a6a;
+    margin:0;
+    padding-bottom: 0.5rem;
+  }
+  
+  
+  .Last-footer {
+    background:#000;
+    text-align: center;
+    padding: 1rem 0;
+    color:gray;
+    margin-bottom: 0px;
+    padding-bottom: 5px;
+  }
+  .footer-icons svg {
+    font-size: 1.5rem;
+    margin-right: 1.25rem;
+    color: #08f610;
+  }
+
+  .footer-icons svg :hover {
+    color: #037425;
+    transition: 0.6s;
+    cursor: pointer;
+  }
+  
+  

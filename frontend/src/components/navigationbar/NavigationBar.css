@@ -1,0 +1,30 @@
+@import url("https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Rubik+Puddles&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .nav_ul li {
+    padding: 0 0.6rem;
+  }
+  
+  .nav_ul a {
+    font-size: 1.5rem;
+    color: #000 !important;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .navbar-brand svg{
+    color:rgb(7, 8, 5);
+    font-size: 3rem;
+    margin-right: 3px;
+
+  }
+.navbar {
+    background-color: #fff;
+}
+
