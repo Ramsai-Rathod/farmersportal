@@ -5,7 +5,8 @@ const mongoose=require( 'mongoose');
 const userrouter=require( './routes/userRoutes');
 const productrouter=require('./routes/product_routes');
 const errorHandler =require( './middlewares/errorMiddleware');
-mongoose.connect('mongodb+srv://ramsaibanoth207:YBxsXExtethSnAjN@cluster0.yiqlekc.mongodb.net/farmersdb')
+const config=require('./config')
+mongoose.connect(config.mongodburl)
 const app=express();
 let port=5000;
 app.use(cors());

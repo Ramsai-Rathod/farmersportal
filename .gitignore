@@ -1,2 +1,3 @@
 node_modules
 frontend/src/components/products/ProductsPage.js
+config.js

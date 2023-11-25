@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const asynchandler=require("express-async-handler");
+const config=require('../config')
 const send=asynchandler(()=>{
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -9,7 +10,7 @@ const transporter = nodemailer.createTransport({
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
     user: "farmerportal00@gmail.com",
-    pass: "mtrw rmru qzri adrc",
+    pass: config.emailpass,
   },
 });
 
