@@ -37,7 +37,7 @@ function Signup() {
 				})
 				setTimeout(
 					navigate('/signin')
-					,1000)
+					,3000)
 			
 			setUser({
 		username:"",

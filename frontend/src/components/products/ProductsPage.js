@@ -5,19 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 
 function ProductsPage() {
-  const[products,setProducts]=useState([]);
-  const getproducts=async()=>{
-    try {
-      const product=await axios.get('/product/user-products');
-      setProducts({...products})
-      console.log()
-    } catch (error) {
-      
-    }
-    
-  }
-  useEffect(getproducts(),[]);
-
+  
   return (
     <div className='prodt'>
     {contents.map(contents => (

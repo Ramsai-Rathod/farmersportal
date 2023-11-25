@@ -4,7 +4,7 @@ const User=require('../models/userModels');
 
 const protect=asynchandler(async(req,res,next)=>{
 let token;
-token=req.cookies.jwt;
+token=req.cookies.jwt||req.body.token||req.headers["authorization"];
 if(token){
     try {
         const decoder=jwt.verify(token,'ramsai@');

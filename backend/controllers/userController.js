@@ -2,7 +2,7 @@ const handler =require('express-async-handler')
 const User =require('../models/userModels')
 const jwt =require('jsonwebtoken');
 const bcrypt=require('bcrypt');
-const send=require('./mailsender')
+const send=require('../utils/mailsender')
 const generateToken=require( '../utils/generateToken');
 const registeruser=handler(async(req,res)=>{  
     const{username,gmail,password,phoneno,catageory}=req.body;

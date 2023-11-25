@@ -17,7 +17,21 @@ const navigate=useNavigate()
 		e.preventDefault();
 		try {
 			await axios.post('/user/login',user)
-			// navigate('/products');
+			toast.success("user created successfully!", {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+				})
+				setTimeout(()=>{
+					navigate('/products');
+				},3000);
+
+			
 		} catch (error) {
 			toast.error(error.response.data, {
 				position: "top-right",
