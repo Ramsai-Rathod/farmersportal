@@ -1,13 +1,14 @@
 const handler =require('express-async-handler')
 const User =require('../models/userModels')
 const jwt =require('jsonwebtoken');
-const bcrypt=require('bcrypt')
+const bcrypt=require('bcrypt');
+const send=require('./mailsender')
 const generateToken=require( '../utils/generateToken');
 const registeruser=handler(async(req,res)=>{  
     const{username,gmail,password,phoneno,catageory}=req.body;
     const userexist=await User.findOne({gmail})
     if(userexist){
-        res.status(400);
+        res.status(400).send("user already exist");
         throw new Error("user already exists");
     }
     const user=await User.create({
@@ -42,7 +43,7 @@ const user=await User.findOne({gmail:gmail});
             gmail:user.gmail
         })
     }else{
-        res.status(401);
+        res.status(401).send("user credentials are wrong!!");
         throw new Error("invalid gmail or password");
     }
 });
@@ -87,5 +88,32 @@ const updateuserprofile=handler(async(req,res)=>{
     }
    
 });
+const resetpasswordgmail=handler(async(req,res)=>{
+    const{gmail}=req.body;
+const user=await User.findOne({gmail:gmail});
+ if(user)
+{
+    var rn = require('random-number');
+var options = {
+  min:  10000
+, max:  99999
+, integer: true
+}
+const otp=rn(options);
+     var data=`OTP for password reset is ${otp} `;
+     console.log(gmail,otp);
+      const stat= send(gmail,data);
+      if(stat)
+      {
+        res.status(200).send("OTP is sent to your email");
+      }
+      else{
+        res.status(500).send("error in sending email.Try again");
+      }
+}
+else{
+    res.status(400).send("user not found");
+}
 
-module.exports={loginuser,registeruser,updateuserprofile,userprofile,logoutuser};
+});
+module.exports={loginuser,registeruser,updateuserprofile,userprofile,logoutuser,resetpasswordgmail};

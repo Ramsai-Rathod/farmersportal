@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaEnvelope } from "react-icons/fa";
 import { FaLock,FaTwitter,FaGoogle,FaFacebook } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 
 function Signup() {
@@ -23,8 +25,20 @@ function Signup() {
 			e.preventDefault();
 		 await axios.post('/user/register',user)
 		 .then(res=>{
-			console.log(res.data)
-			navigate('/signin');
+			toast.success("user created successfully!", {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+				})
+				setTimeout(
+					navigate('/signin')
+					,1000)
+			
 			setUser({
 		username:"",
 		gmail:"",
@@ -34,15 +48,36 @@ function Signup() {
 			})
 		 })
 		 .catch(err=>{
-			console.log(err)
+			console.log(err.response.data)
+			toast.error(err.response.data, {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+				})
 		 });
-	}catch(e){
-			console.log(e.message);
+	}catch(err){
+		
+			toast.error(err, {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+				});
 	}
 
 	}
 
   return (
+	<>
     <div>
       <div  className="container infinity-container">
 		    <div  className="row">
@@ -114,6 +149,8 @@ function Signup() {
 		    </div>
 	    </div>
     </div>
+	 <ToastContainer />
+	 </>
   )
 }
 

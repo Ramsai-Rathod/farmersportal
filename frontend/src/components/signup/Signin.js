@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaTwitter,FaGoogle,FaFacebook } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signin() {
 const navigate=useNavigate()
@@ -15,12 +17,23 @@ const navigate=useNavigate()
 		e.preventDefault();
 		try {
 			await axios.post('/user/login',user)
-			navigate('/products');
+			// navigate('/products');
 		} catch (error) {
-			console.log(error.message)
+			toast.error(error.response.data, {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+				})
 		}
 	}
   return (
+	
+	<>
     <div>
       <div className="container infinity-container">
 		    <div className="row">
@@ -85,7 +98,10 @@ const navigate=useNavigate()
 			    <div className="col-md-1 infinity-right-space"></div>
 		    </div>
 	    </div>
+		
   </div>
+  <ToastContainer />
+  </>
   )
 }
 

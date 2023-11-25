@@ -1,10 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Signup.css'
 import { Link } from 'react-router-dom';
 import { FaEnvelope } from "react-icons/fa";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios'
 
 function Reset() {
+	const[gmail,setGmail]=useState("");
+	const handler=async(e)=>{
+		try {
+			e.preventDefault();
+			const res=await axios.post('/user/reset-pass',{gmail})
+			if(res){
+				toast.success("OTP sent to gmail.Check inbox!", {
+					position: "top-right",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "light",
+					})
+
+			}
+			
+		} catch (error) {
+			toast.error(error.response.data, {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+				})
+		}
+	}
   return (
     <div>
       <div className="container infinity-container">
@@ -18,14 +52,16 @@ function Reset() {
 				    <form className="reset-password-form px-3">
 				    	<h4>Reset Your password</h4>
 				        <p className="mb-3" style={{color: "#777"}}>
-				            Please enter your email address and we will send you a password reset link.
+				            Please enter your email address and we will send you a OTP.
 				        </p>
 				        <div className="form-input">
 							<span><FaEnvelope/></span>
-							<input type="email" name="" placeholder="Email Address" tabIndex="10"required/>
+							<input type="gmail" name="" placeholder="Email Address" tabIndex="10"required onChange={(e)=>{
+								setGmail(e.target.value);
+							}}/>
 						</div>
 				        <div className="mb-3"> 
-							<button type="submit" className="btn">Send Reset Link</button>
+							<button type="submit" className="btn" onClick={handler}>Send Reset Link</button>
 						</div>
 				    </form>
 				</div>
@@ -36,7 +72,7 @@ function Reset() {
 					</div>
 					<div className="mb-3">
 					<Link to="/signin">
-					    <button type="submit" className="btn">Login Now</button>
+					    <button type="submit" className="btn" >Login Now</button>
 					</Link>
 				</div>
 			</div> 
@@ -45,6 +81,7 @@ function Reset() {
 		</div>
     </div>
 	</div>
+	<ToastContainer />
     </div>
   )
 }

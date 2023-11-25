@@ -8,7 +8,8 @@ function ProductsPage() {
   const[products,setProducts]=useState([]);
   const getproducts=async()=>{
     try {
-      products=await axios.get('/product/user-products');
+      const product=await axios.get('/product/user-products');
+      setProducts({...products})
       console.log()
     } catch (error) {
       

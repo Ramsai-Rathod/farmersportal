@@ -1,7 +1,8 @@
 const nodemailer = require("nodemailer");
 const asynchandler=require("express-async-handler");
 const config=require('../config')
-const send=asynchandler(()=>{
+const send=asynchandler(({gmail,data})=>{
+  console.log({gmail,data});
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -16,14 +17,14 @@ const transporter = nodemailer.createTransport({
 
 const mailOptions= {
     from: 'farmerportal00@gmail.com', // sender address
-    to: "ramsaibanoth207@gmail.com", // list of receivers
+    to: `${gmail}`, // list of receivers
     subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
+    text: `Hello dear customer`, // plain text body
+    html: `<b>${data}</b>`, // html body
   };
   transporter.sendMail(mailOptions,function(err){
     console.log(err)
   })
 
 })
-send();
+module.exports=send;
