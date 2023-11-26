@@ -6,7 +6,6 @@ userrouter.post('/login',loginuser);
 userrouter.post('/register',registeruser);
 userrouter.post('/reset-pass',resetpasswordgmail);
 userrouter.get('/logout',logoutuser);
-userrouter.get('/profile',protect,) 
-
+userrouter.get('/profile',protect,userprofile) 
 userrouter.put('/profile',protect,updateuserprofile);
 module.exports= userrouter; 
