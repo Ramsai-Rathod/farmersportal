@@ -2,11 +2,31 @@ const express=require('express');
 const router=express.Router();
 const protect=require('../middlewares/authmiddleware');
 const{getproduct,updateproduct,addproduct,deleteproduct,showProduct,showProducts}=require('../controllers/productController');
+const path=require('path');
+const multer=require('multer');
+router.use(express.static('path'));
+const storage=multer.diskStorage({
+    destination:function(req,file,cb){
+        cb(null,path.join(__dirname,'../public/productimages'),function(err,success){
+            if(err){
+                throw err;
+            }
+        });
+    },
+    filename:function(req,file,cb){
+        const name=Date.now()+'-'+file.originalname;
+        cb(null,name,function(err,success){
+            if(err){
+                throw err;
+            }
+        });
+    }
+});
+const upload=multer({storage:storage});
 router.use(protect);
-router.route('/farm-product').post(addproduct)
+router.route('/farm-product',protect).post(upload.array('productimages'),addproduct)
 .get(getproduct)
-router.route('/farm-product/:id').put(updateproduct)
+router.route('/farm-product/:id',protect).put(updateproduct)
 .delete(deleteproduct)
 router.get('/user-products',showProducts)
-router.get('/user-product/:id',showProduct)
 module.exports=router;

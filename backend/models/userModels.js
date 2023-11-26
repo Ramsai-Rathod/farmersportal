@@ -5,6 +5,10 @@ const userSchema=mongoose.Schema({
         type:String,
         required:true,
     },
+    profile:{
+        type:String,
+        default:null,
+    },
     gmail:{
         type:String,
         required:true,

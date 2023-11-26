@@ -1,9 +1,10 @@
 const handler =require('express-async-handler')
 const User =require('../models/userModels')
-const jwt =require('jsonwebtoken');
 const bcrypt=require('bcrypt');
 const send=require('../utils/mailsender')
 const generateToken=require( '../utils/generateToken');
+
+
 const registeruser=handler(async(req,res)=>{  
     const{username,gmail,password,phoneno,catageory}=req.body;
     const userexist=await User.findOne({gmail})
@@ -31,6 +32,8 @@ const registeruser=handler(async(req,res)=>{
     }
 
      });
+
+
 const loginuser=handler(async(req,res)=>{
     const{gmail,password}=req.body;
 const user=await User.findOne({gmail:gmail});
@@ -47,6 +50,8 @@ const user=await User.findOne({gmail:gmail});
         throw new Error("invalid gmail or password");
     }
 });
+
+
 const logoutuser=handler(async(req,res)=>{
     res.cookie('jwt','',{
         httpOnly:true,
@@ -54,6 +59,8 @@ const logoutuser=handler(async(req,res)=>{
     });
     res.status(201).json({message:'user logged out'})
 });
+
+
 const userprofile=handler(async(req,res)=>{
     const user=req.user;
     res.status(200).json({
@@ -64,22 +71,18 @@ const userprofile=handler(async(req,res)=>{
     res.status(201).json({message:'user profile user'})
 });
 
+
 const updateuserprofile=handler(async(req,res)=>{
     const user=await User.findById(req.user._id);
     if(user){
-        user.username= req.body.username||user.username;
         user.gmail= req.body.gmail||user.gmail;
-
-    
-    if(req.body.password)
-    {
-        user.password=req.body.password;
-    }
+        user.profile=req.file.filename||user.profile;
     const updated=await user.save();
     res.status(200).json({
         _id:updated._id,
         username:updated.username,
-        gmail:updated.gmail
+        gmail:updated.gmail,
+        profile:updated.profile
     });
 }
     else{
@@ -88,6 +91,8 @@ const updateuserprofile=handler(async(req,res)=>{
     }
    
 });
+
+
 const resetpasswordgmail=handler(async(req,res)=>{
     const{gmail}=req.body;
 const user=await User.findOne({gmail:gmail});
