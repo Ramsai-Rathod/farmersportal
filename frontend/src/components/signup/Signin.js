@@ -17,7 +17,7 @@ const navigate=useNavigate()
 		e.preventDefault();
 		try {
 			await axios.post('/user/login',user)
-			toast.success("user created successfully!", {
+			toast.success("user authorization done!", {
 				position: "top-right",
 				autoClose: 5000,
 				hideProgressBar: false,

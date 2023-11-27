@@ -22,6 +22,10 @@ const userSchema=mongoose.Schema({
         type:Number,
         require:true
     },
+    otp:{
+        type:Number,
+        default:null,
+    },
     catageory:{
         type:String,
         required:true

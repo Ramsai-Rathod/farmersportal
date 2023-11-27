@@ -3,6 +3,7 @@ const User =require('../models/userModels')
 const bcrypt=require('bcrypt');
 const send=require('../utils/mailsender')
 const generateToken=require( '../utils/generateToken');
+const { ClientSession } = require('mongodb');
 
 
 const registeruser=handler(async(req,res)=>{  
@@ -105,6 +106,8 @@ var options = {
 , integer: true
 }
 const otp=rn(options);
+    user.otp=otp;
+    await user.save();
      var data=`OTP for password reset is ${otp} `;
      console.log(gmail,otp);
       const stat= send(gmail,data);
@@ -121,4 +124,21 @@ else{
 }
 
 });
-module.exports={loginuser,registeruser,updateuserprofile,userprofile,logoutuser,resetpasswordgmail};
+const sendotp=handler(async(req,res)=>{
+    console.log(req);
+    console.log("its here")
+    const sentotp=parseInt(req.body.otp);
+    const user=await User.findOne({otp:sentotp});
+    if(user)
+    {
+        user.password=req.body.password;
+        user.otp=null;
+        user.save();
+        return res.status(200).send("password has changed succesfully!!")
+    }
+    else{
+        return res.status(400).json("user doesn't exist");
+    }
+
+})
+module.exports={loginuser,registeruser,updateuserprofile,userprofile,logoutuser,resetpasswordgmail,sendotp};

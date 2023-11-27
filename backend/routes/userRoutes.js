@@ -1,7 +1,7 @@
 const express =require('express');
 const protect =require('../middlewares/authmiddleware') ;
 const multer=require('multer');
-const {loginuser,registeruser,updateuserprofile, userprofile,logoutuser, resetpasswordgmail}  =require( '../controllers/userController')
+const {loginuser,registeruser,updateuserprofile, userprofile,logoutuser, resetpasswordgmail,sendotp}  =require( '../controllers/userController')
 const userrouter=express.Router();
 const path=require('path');
 userrouter.use(express.static('path'));
@@ -26,7 +26,8 @@ const upload=multer({storage:storage});
 userrouter.post('/login',loginuser);
 userrouter.post('/register',registeruser);
 userrouter.post('/reset-pass',resetpasswordgmail);
+userrouter.post('/otp',sendotp);
 userrouter.get('/logout',protect,logoutuser);
-userrouter.get('/profile',protect,userprofile) 
+userrouter.get('/profile',protect,userprofile) ;
 userrouter.put('/profile-update',upload.single('profile'),protect,updateuserprofile);
 module.exports= userrouter; 

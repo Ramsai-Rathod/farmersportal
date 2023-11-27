@@ -7,6 +7,7 @@ import Signup from './components/signup/Signup'
 import Signin from './components/signup/Signin';
 import Reset from './components/signup/Reset'
 import Contact from './components/contact/Contact';
+import Sendotp from './components/signup/Sendotp';
 
 
 function App() {
@@ -36,6 +37,10 @@ function App() {
     {
       path:"/resetpassword",
       element:<Reset />
+    },
+    {
+      path:"/reset-otp",
+      element:<Sendotp />
     },
     {
       path:"/contactus",
