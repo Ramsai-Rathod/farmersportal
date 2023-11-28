@@ -23,6 +23,7 @@ function Signup() {
 	const signupsubmit=async(e)=>{
 		try{
 			e.preventDefault();
+			user.catageory=user.catageory.toLowerCase();
 		 await axios.post('/user/register',user)
 		 .then(res=>{
 			toast.success("user created successfully!", {

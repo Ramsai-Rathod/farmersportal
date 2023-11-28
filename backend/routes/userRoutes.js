@@ -4,7 +4,7 @@ const multer=require('multer');
 const {loginuser,registeruser,updateuserprofile, userprofile,logoutuser, resetpasswordgmail,sendotp}  =require( '../controllers/userController')
 const userrouter=express.Router();
 const path=require('path');
-userrouter.use(express.static('path'));
+userrouter.use(express.static('public'));
 const storage=multer.diskStorage({
     destination:function(req,file,cb){
         cb(null,path.join(__dirname,'../public/userprofiles'),function(err,success){

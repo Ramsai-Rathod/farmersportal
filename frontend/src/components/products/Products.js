@@ -1,28 +1,24 @@
-import { FaShoppingCart, FaRegBookmark, FaStar, FaFireAlt } from 'react-icons/fa';
-
+import { FaShoppingCart, FaRegBookmark,  FaFireAlt } from 'react-icons/fa';
 export function Products(props) {
+  const path=`/productimages/${props.images}`;
     return(
         <div className='productList'>
-            <div key={props.id} className='productCard'>
-                <img src={props.image} alt='product-img' className='productImage'></img>
+            <div key={props._id} className='productCard'>
+                <img src={path} alt='product-img' className='productImage'></img>
 
                 <FaShoppingCart className={"productCard__cart"} />
                 <FaRegBookmark className={"productCard__wishlist"} />
                 <FaFireAlt className={"productCard__fastSelling"} />
 
                 <div className='productCard__content'>
-                    <h3 className='productName'>{props.name}</h3>
+                    <h3 className='productName'>{props.productname}</h3>
                     <div className='displayStack__1'>
                         <div className='productPrice'>${props.price}</div>
-                        <div className='productSales'>{props.totalSales} units sold</div>
+                        <div className='productSales'>{props.quantity} units available</div>
                     </div>
                     <div className='displayStack__2'>
-                        <div className='productRating'>
-                            {[...Array(props.rating)].map((index) => (
-                                <FaStar id={index + 1 } key={index} />
-                            ))}
-                        </div>
-                        <div className='productTime'>{props.timeLeft} days left</div>
+                        
+                        <div className='productTime'>catagory:{props.catageory}</div>
                     </div>
                 </div>
             </div>

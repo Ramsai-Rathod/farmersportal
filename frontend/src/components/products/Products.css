@@ -27,7 +27,7 @@
   
   .productCard:hover{
     transform: translateY(-0.5rem);
-    box-shadow: 0.5rem 0.75rem 1.5rem #bbbbbb;
+    box-shadow: 0.5rem 0.75rem 1.5rem #72a274;
   }
   
   .productImage{

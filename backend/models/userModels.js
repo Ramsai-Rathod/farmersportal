@@ -45,4 +45,4 @@ userSchema.methods.passwordcheck=async function(enteredpassword){
 return bcrypt.compare(enteredpassword,this.password);
 }
 
-module.exports=mongoose.model('User',userSchema);
+module.exports=mongoose.model('users',userSchema);

@@ -3,7 +3,7 @@ const User =require('../models/userModels')
 const bcrypt=require('bcrypt');
 const send=require('../utils/mailsender')
 const generateToken=require( '../utils/generateToken');
-const { ClientSession } = require('mongodb');
+
 
 
 const registeruser=handler(async(req,res)=>{  

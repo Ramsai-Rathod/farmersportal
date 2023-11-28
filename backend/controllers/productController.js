@@ -74,18 +74,18 @@ const showProducts=handler(async(req,res)=>{
     }
     });
 
-    const showProduct=handler(async(req,res)=>{
-        const product=await Product.find({id:req.params.id})
-        if(product)
-        {
+    // const showProduct=handler(async(req,res)=>{
+    //     const product=await Product.find({id:req.params.id})
+    //     if(product)
+    //     {
 
-            return res.status(201).json({product});
-        }
-        if(!product)
-        {
+    //         return res.status(201).json({product});
+    //     }
+    //     if(!product)
+    //     {
 
-           return res.status(400).json({"message":"item not found"});
-        }
-        });
+    //        return res.status(400).json({"message":"item not found"});
+    //     }
+    //     });
 
-module.exports={getproduct,updateproduct,addproduct,deleteproduct,showProduct,showProducts};
+module.exports={getproduct,updateproduct,addproduct,deleteproduct,showProducts};

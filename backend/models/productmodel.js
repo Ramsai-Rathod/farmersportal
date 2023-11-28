@@ -4,6 +4,7 @@ const product_schema=mongoose.Schema({
     {
         type:mongoose.SchemaTypes.ObjectId,
         required:true,
+        ref:"users",
     },
     productname:{
         type:String,
