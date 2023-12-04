@@ -9,6 +9,9 @@ import Reset from './components/signup/Reset'
 import Contact from './components/contact/Contact';
 import Sendotp from './components/signup/Sendotp';
 import Profilepage from './components/Profilepage';
+import Orderpage from './components/Oders/Orderpage';
+import Cart from './components/cart/Cart';
+import Productdetails from './components/products/Productdetails';
 
 
 function App() {
@@ -46,6 +49,18 @@ function App() {
     {
       path:"/profile",
       element:<Profilepage />
+    },
+    {
+      path:"/orderpage",
+      element:< Orderpage/>
+    },
+    {
+      path:"/cart",
+      element:<Cart />
+    },
+    {
+      path:"/product/:id",
+      element:<Productdetails />
     },
     {
       path:"/contactus",
