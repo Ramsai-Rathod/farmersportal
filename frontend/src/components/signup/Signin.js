@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import './Signup.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaTwitter,FaGoogle,FaFacebook } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 function Signin() {
 const navigate=useNavigate()
@@ -27,13 +28,15 @@ const navigate=useNavigate()
 				progress: undefined,
 				theme: "light",
 				})
-				setTimeout(()=>{
-					navigate('/products');
-				},3000);
+				setTimeout(() => {
+					navigate('/products')
+				}, 2000);
+				
+			
 
 			
 		} catch (error) {
-			toast.error(error.response.data, {
+			toast.error(error.response,{
 				position: "top-right",
 				autoClose: 5000,
 				hideProgressBar: false,
@@ -45,6 +48,8 @@ const navigate=useNavigate()
 				})
 		}
 	}
+	
+	
   return (
 	
 	<>

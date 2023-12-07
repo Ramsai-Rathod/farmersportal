@@ -1,22 +1,25 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 const Orderpage = () => {
-  const orders={};
-  useEffect(async() => {
-   orders=await axios.get("/order/get-orders");
-  }, [orders])
+  const[orders,setOrders]=useState([]);
+  const getorders= async() => {
+    const response=await axios.get("/order/get-orders");
+    setOrders(response.data);
+   }
+  useEffect(()=>{
+    getorders();
+}, [orders])
   
   return (
-    <>
+    <div>
     {
-        orders.products.length==0 ?(
+        orders.products===0 ?(
   <div className='text-center'>
     <h1>You Haven't ordered anything!</h1>
   </div>
         ):
 
-      (orders.products.map((product)=>{        
+      (orders?.map((product)=>{        
         
                   <div className="card mb-3 my-5" style={{width:'700px'}}>
           <div className="row g-0">
@@ -37,7 +40,7 @@ const Orderpage = () => {
 </div>
       }))
     }
-      </>
+      </div>
   )
       };
 export default Orderpage

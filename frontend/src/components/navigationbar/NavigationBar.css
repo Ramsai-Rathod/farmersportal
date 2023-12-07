@@ -27,4 +27,20 @@
 .navbar {
     background-color: #fff;
 }
+.added{
+  position:relative;
 
+}
+.profile{
+  top:25px;
+  left:20px;
+  font-size: 3rem;
+}
+.cart{
+  top:-30px;
+  left:150px;
+}
+.insiz{
+  font-size: 3rem;
+    margin-right: 3px;
+}

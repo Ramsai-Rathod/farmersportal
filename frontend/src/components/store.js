@@ -5,7 +5,7 @@ const store=(set)=>(
     userdata:{},
     loggedin:false,
     setLogin:(bol)=>{
-        set({loggedin:bol})
+        set()
     },
     setuser:(user)=>{
         set({userdata:user})

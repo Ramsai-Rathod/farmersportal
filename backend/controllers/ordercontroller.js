@@ -1,16 +1,19 @@
 const Order=require('../models/ordermodel')
 const controller=require('../controllers/cartcontroller')
-
+const Cart=require('../models/cartmodel');
 
 const CreateOrder=async(req,res)=>{
+    const cartdetails=await Cart.findById(req.bodt.cartid)
     try {
         const order=await Order.create({
             userId:req.user._id,
-            products:req.body.products,
+           cartid:req.body.cartid,
+           products:products,
             totalPrice:req.body.totalPrice,
             paymentDetails:req.body.paymentDetails,
             shippingAddress:req.body.shippingAddress,
         }) 
+        
         if(order)
         {
             controller.Deletecart(req.user._id);
@@ -52,7 +55,18 @@ const Getorders=async(req,res)=>{
         const order=await Order.findOne({userId:req.user._id});
         if(order)
         {
-               return res.status(200).json({order})
+            const Ordersdata= await Order.findOne({userId:req.user._id}).populate({
+                path: 'products',
+                match: { productId: { $in:req.body.products } }, // Filter products by the specified productIds
+                populate: {
+                  path: 'productId',
+                  model: 'Product', // Replace with the actual model name for your Product schema
+                },
+              })
+              .exec();
+            // Filter out products that are not found
+            const products = Ordersdata.products.filter((product) => product.productId);
+            return res.status(200).send(products);
          }
             
         else{

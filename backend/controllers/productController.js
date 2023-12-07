@@ -4,19 +4,21 @@ const Product =require('../models/productmodel');
 const getproduct=handler(async(req,res)=>{
 const products=await Product.find({user_id:req.user._id})
 if(products){
-   return res.status(200).json({products});
+    res.status(200).json({products});
 }
 if(!products)
- return res.status(400).json({"message":"item not found"});
+  res.status(400).json({"message":"item not found"});
 });
 
 const addproduct=handler(async(req,res)=>{
     const images=[];
     for(var i=0;i<req.files?.length;i++)
-    {
+    {  
         images[i]=req.files[i].filename;
     }
     const{productname,price,description,quantity,catageory}=req.body;
+    
+    console.log(req.user);
     const product=await Product.create({
         user_id:req.user._id,
         productname,
@@ -27,9 +29,9 @@ const addproduct=handler(async(req,res)=>{
         productimages:images,
     })
     if(!product)
-   return res.status(401).json({message:"internal server error product not added"})
-
-    return res.status(201).json({message:"product created succesfully"})
+        res.status(401).json({message:"internal server error product not added"})
+    else
+         res.status(201).json({message:"product created succesfully"})
 
 });
 
@@ -62,7 +64,7 @@ const deleteproduct=handler(async(req,res)=>{
 
 });
 const showProducts=handler(async(req,res)=>{
-    const products=await Product.find({})
+    const products=await Product.find()
     if(products){
        return res.status(201).json({products});
     }

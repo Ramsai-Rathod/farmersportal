@@ -29,5 +29,13 @@ userrouter.post('/reset-pass',resetpasswordgmail);
 userrouter.post('/otp',sendotp);
 userrouter.get('/logout',protect,logoutuser);
 userrouter.get('/profile',protect,userprofile) ;
+userrouter.get('/loggedin',(req,res)=>{
+    if(req.cookies.jwt||req.body.token||req.headers["authorization"])
+    res.status(200).send({data:true})
+else
+{
+    res.status(200).send({data:false})
+}
+})
 userrouter.put('/profile-update',upload.single('profile'),protect,updateuserprofile);
 module.exports= userrouter; 

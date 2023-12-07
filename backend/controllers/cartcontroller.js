@@ -2,6 +2,7 @@ const Cart=require('../models/cartmodel')
 
 const addProductToCart=async(req,res)=> {
     try {
+      console.log(req.user._id,req.params.id,req.body.quantity)
         const userId=req.user._id;
         const productid=req.params.id;
         const quantity=parseInt(req.body.quantity);
@@ -42,19 +43,28 @@ const addProductToCart=async(req,res)=> {
   }
   const getcart=async(req,res)=>{
     try {
-      const data=await Cart.findOne({userId:req.user._id});
-      if(data)
-      {
-        return res.status(200).send(data);
+      const cart = await Cart.findOne( {userId:req.user._id} )
+      if (!cart) {
+        return res.status(200).json({msg:"no items in cart"});
       }
-      else{
-        return res.status(401).send("no cart is found");
-      }
-      
+      const cartdata= await Cart.findOne({userId:req.user._id}).populate({
+          path: 'products',
+          match: { productId: { $in:req.body.products } }, // Filter products by the specified productIds
+          populate: {
+            path: 'productId',
+            model: 'Product', // Replace with the actual model name for your Product schema
+          },
+        })
+        .exec();
+      // Filter out products that are not found
+      const products = cartdata.products.filter((product) => product.productId);
+      return res.status(200).send(products);
     } catch (error) {
-      return res.status(400).send("error in retriving data");
+      console.error('Error retrieving product details:', error);
+      throw error;
     }
   }
+  
   const removeProductFromCart=async(req,res)=> {
     try {
       // Find the user's cart

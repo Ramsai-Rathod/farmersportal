@@ -22,6 +22,10 @@ const userSchema=mongoose.Schema({
         type:Number,
         require:true
     },
+    address: {
+        type:String,
+        default:null,
+      },
     otp:{
         type:Number,
         default:null,

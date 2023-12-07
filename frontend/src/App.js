@@ -12,8 +12,8 @@ import Profilepage from './components/Profilepage';
 import Orderpage from './components/Oders/Orderpage';
 import Cart from './components/cart/Cart';
 import Productdetails from './components/products/Productdetails';
-
-
+import Datastate from './context/Datastate';
+import Addproducts from './components/products/Addproducts';
 function App() {
   const router=createBrowserRouter([
     {
@@ -47,6 +47,10 @@ function App() {
       element:<Sendotp />
     },
     {
+      path:"/addproducts",
+      element:<Addproducts/>
+    },
+    {
       path:"/profile",
       element:<Profilepage />
     },
@@ -59,7 +63,7 @@ function App() {
       element:<Cart />
     },
     {
-      path:"/product/:id",
+      path:"/products/:id",
       element:<Productdetails />
     },
     {
@@ -70,7 +74,9 @@ function App() {
 
   return (
     <div >
+      <Datastate>
       <RouterProvider router={router} />
+      </Datastate>
     </div>
   );
 }

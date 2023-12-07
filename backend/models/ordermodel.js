@@ -10,6 +10,10 @@ const orderSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
      ref: 'Product' 
     }],
+    cartid: { 
+      type: mongoose.Schema.Types.ObjectId,
+       ref: 'Cart' 
+      },
   totalPrice: {
      type: Number, 
      required: true
@@ -22,7 +26,7 @@ const orderSchema = new mongoose.Schema({
   paymentDetails: {
     type:String,
     required:true,
-    default:"COD"
+    default:"Pre-paid"
   },
   shippingAddress: {
     type:String,

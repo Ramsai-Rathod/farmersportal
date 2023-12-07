@@ -1,22 +1,23 @@
 import { Products } from './Products';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useContext } from 'react';
 import './Products.css'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useStore } from '../store';
-
+import Datacontext from '../../context/Datacontext';
 function ProductsPage() {
+  var res;
+  const cont=useContext(Datacontext);
   const [products,setProducts]=useState([]);
-  const setproduct=useStore((state)=>state.setProducts);
-  const product=useStore((state)=>state.productsarray);
-console.log("iam here"+ product);
+  const getUserdata=async()=>{
+   res=await axios.get('/user/loggedin')
+      cont.setlog(res.data.data)
+  }
  const getproductdata=()=>{
   axios.get('/product/user-products')
   .then(res=>{
-    console.log(res.data.products);
     setProducts([...res.data.products])
-    setproduct(products);
+    cont.productsset([...res.data.products]);
 })
   .catch(err=>{
     toast.error(err.response, {
@@ -35,12 +36,14 @@ console.log("iam here"+ product);
  }
   useEffect(()=>{
      getproductdata();
+     getUserdata();
   },[])
   return (
     <div className='prodt'>
     {products?.map(product => (
         <Products 
             key={product._id}
+            id={product._id}
             images={product.productimages[0]}
             name={product.productname}
             price={product.price}

@@ -13,6 +13,8 @@ const storage=multer.diskStorage({
         });
     },
     filename:function(req,file,cb){
+        // console.log(file.originalname);
+        // console.log(file.name);
         const name=Date.now()+'-'+file.originalname;
         cb(null,name,function(err,success){
             if(err){
@@ -22,7 +24,7 @@ const storage=multer.diskStorage({
     }
 });
 const upload=multer({storage:storage});
-router.route('/farm-product',protect).post(upload.array('productimages'),addproduct).get(getproduct)
+router.route('/farm-product').post(protect,upload.array('productimages'),addproduct).get(protect,getproduct)
 router.route('/farm-product/:id',protect).put(updateproduct)
 .delete(deleteproduct)
 router.get('/user-products',showProducts)

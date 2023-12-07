@@ -3,7 +3,13 @@ import { Link} from 'react-router-dom';
 import './NavigationBar.css'
 import { RiLoginCircleFill } from "react-icons/ri";
 import { GiFarmer } from "react-icons/gi";
+import Datacontext from '../../context/Datacontext';
+import { CgProfile } from "react-icons/cg";
+import { useContext } from 'react';
+import { FaCartArrowDown } from "react-icons/fa";
+
 function NavigationBar(){
+    const cont=useContext(Datacontext);
   return(
     <div>
        <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -27,9 +33,24 @@ function NavigationBar(){
                                 <Link className="nav-link" to="/contactus">Contact Us</Link>
                             </li>
                             <div className="mx-3 login">
-                            <li className="nav-item">
+                            {
+                                cont.loggedin===false?(
+                                <li className="nav-item">
                                 <Link className="nav-link" to="/signin">Login<RiLoginCircleFill/></Link>
-                            </li>
+                            </li>):
+                            (<>
+                                <li className="nav-link added profile" >
+                                <Link className="nav-link insiz" to="/profile">
+                                <CgProfile />
+                                </Link>
+                                </li>
+                                <li className="nav-link added cart" >
+                                <Link className="nav-link insiz" to="/cart">
+                                    <FaCartArrowDown /></Link>
+                                </li>
+                                </>
+                            )
+                            }
                             </div>
                         </ul>
                     </div>

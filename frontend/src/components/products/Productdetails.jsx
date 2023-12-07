@@ -1,35 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext} from "react";
 import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useStore } from "../store";
-
+import Datacontext from "../../context/Datacontext";
 const Productdetails = () => {
-  const { id } = useParams();
-  const product={};
-  const [relatedProducts, setRelatedProducts] = useState([]);
-  const products=useStore((state)=>state.productsarray);
-  const todo=()=>{
-    console.log(products);
-    const filterProduct = products.filter((product) => product._id === id);
-    const relatedProducts = items.filter(
-      (suman) => suman.category === product.category
+  const cont=useContext(Datacontext);
+  const products=cont.products;
+  const {id}  = useParams();
+  const product=products.find((product)=>(
+    product._id.toString()===id.toString())
     );
-
-    // console.log("RelatedProduct = ",relatedProducts)
-    setRelatedProducts(relatedProducts);
-  }
-  useEffect(() => {
-    todo();
-  }, [id, product.category]);
+  console.log(product);
+  const path=`/productimages/${product.productimages}`;
+  //const path=`/productimages/${product.productimages[0]}`;
   return (
     <>
     <div>
     </div>
       <div className="container con">
-        <div className="img">
-          <img src={`/productimages/${product.imgSrc}`}alt="" />
-        </div>
+      <img src={path} alt='product-img' className='productImage'></img>
+
+        {/* <div className="img">
+          <img src={path}alt="product image" />
+        </div> */}
         <div className="text-center">
           <h1 className="card-title">{product.productname}</h1>
           <p className="card-text">{product.description}</p>
@@ -56,6 +49,6 @@ const Productdetails = () => {
     </>
   
   );
-};
+}
 
 export default Productdetails;

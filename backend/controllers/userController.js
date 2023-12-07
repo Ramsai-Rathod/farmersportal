@@ -64,11 +64,7 @@ const logoutuser=handler(async(req,res)=>{
 
 const userprofile=handler(async(req,res)=>{
     const user=req.user;
-    res.status(200).json({
-        id:user._id,
-        username:user.username,
-        gmail:user.gmail
-    })
+    res.status(200).json(user)
     res.status(201).json({message:'user profile user'})
 });
 
@@ -76,14 +72,16 @@ const userprofile=handler(async(req,res)=>{
 const updateuserprofile=handler(async(req,res)=>{
     const user=await User.findById(req.user._id);
     if(user){
-        user.gmail= req.body.gmail||user.gmail;
+        user.phoneno= req.body.phoneno||user.phoneno;
         user.profile=req.file.filename||user.profile;
+        user.address=req.body.address||user.address;
     const updated=await user.save();
     res.status(200).json({
         _id:updated._id,
         username:updated.username,
-        gmail:updated.gmail,
-        profile:updated.profile
+        phoneno:updated.phoneno,
+        profile:updated.profile,
+        address:updated.address,
     });
 }
     else{
